@@ -1,0 +1,105 @@
+{
+    "name" : "纸间",
+    "appid" : "__UNI__41EC232",
+    "description" : "纸间，一个留给阅读的地方。发现好书，整理自己的书架，写下阅读留下的回响。",
+    "versionName" : "1.0.0",
+    "versionCode" : "100",
+    "transformPx" : false,
+    "app-plus" : {
+        "usingComponents" : true,
+        "nvueStyleCompiler" : "uni-app",
+        "compilerVersion" : 3,
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : true,
+            "waiting" : true,
+            "autoclose" : true,
+            "delay" : 0
+        },
+        "modules" : {},
+        "distribute" : {
+            "android" : {
+                "permissions" : [
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>"
+                ]
+            },
+            "ios" : {
+                "dSYMs" : false
+            },
+            "sdkConfigs" : {},
+            "icons" : {
+                "android" : {
+                    "mdpi" : "static/app-icons/icon-48.png",
+                    "hdpi" : "static/app-icons/icon-72.png",
+                    "xhdpi" : "static/app-icons/icon-96.png",
+                    "xxhdpi" : "static/app-icons/icon-144.png",
+                    "xxxhdpi" : "static/app-icons/icon-192.png"
+                },
+                "ios" : {
+                    "appstore" : "static/app-icons/icon-1024.png",
+                    "iphone" : {
+                        "app@2x" : "static/app-icons/icon-120.png",
+                        "app@3x" : "static/app-icons/icon-180.png",
+                        "spotlight@2x" : "static/app-icons/icon-80.png",
+                        "spotlight@3x" : "static/app-icons/icon-120.png",
+                        "settings@2x" : "static/app-icons/icon-58.png",
+                        "settings@3x" : "static/app-icons/icon-87.png",
+                        "notification@2x" : "static/app-icons/icon-40.png",
+                        "notification@3x" : "static/app-icons/icon-60.png"
+                    },
+                    "ipad" : {
+                        "app" : "static/app-icons/icon-76.png",
+                        "app@2x" : "static/app-icons/icon-152.png",
+                        "proapp@2x" : "static/app-icons/icon-167.png",
+                        "spotlight" : "static/app-icons/icon-40.png",
+                        "spotlight@2x" : "static/app-icons/icon-80.png",
+                        "settings" : "static/app-icons/icon-29.png",
+                        "settings@2x" : "static/app-icons/icon-58.png",
+                        "notification" : "static/app-icons/icon-20.png",
+                        "notification@2x" : "static/app-icons/icon-40.png"
+                    }
+                }
+            }
+        },
+        "safearea" : {
+            "background" : "#faf9f5",
+            "bottom" : {
+                "offset" : "none"
+            }
+        }
+    },
+    "quickapp" : {},
+    "mp-weixin" : {
+        "appid" : "wx19f4624a6a070135",
+        "setting" : {
+            "urlCheck" : false,
+            "es6" : true,
+            "minified" : true
+        },
+        "usingComponents" : true,
+        "styleIsolation" : "apply-shared"
+    },
+    "mp-alipay" : {
+        "usingComponents" : true
+    },
+    "mp-baidu" : {
+        "usingComponents" : true
+    },
+    "mp-toutiao" : {
+        "usingComponents" : true
+    },
+    "h5" : {
+        "title" : "纸间 · 在书页之间，遇见自己",
+        "router" : {
+            "mode" : "hash",
+            "base" : "/"
+        },
+        "devServer" : {
+            "port" : 5173
+        }
+    },
+    "uniStatistics" : {
+        "enable" : false
+    },
+    "vueVersion" : "3"
+}

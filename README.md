@@ -2,6 +2,8 @@
 
 一个完整的 Vue 3 纯前端项目，主题是发现好书、整理书架和记录阅读感想。无后端、无账号、无 API 密钥，下载后即可运行。
 
+> **uni-app / HBuilderX 版**：`uniapp/` 目录是迁移后的 uni-app 工程（Vue 3 + uni-app，可运行到 H5 / App / 微信小程序，并可云打包 APK）。用 HBuilderX 打开 `uniapp/` 这一层即可，迁移说明与运行步骤见 [`uniapp/README.md`](uniapp/README.md)。本 README 其余内容描述的是原 Web 工程，两者互不影响。
+
 ## 对照任务要求
 
 | 要求                      | 实现                                                                     |

@@ -1,0 +1,92 @@
+{
+  "pages": [
+    {
+      "path": "pages/discover/discover",
+      "style": {
+        "navigationBarTitleText": "纸间 · 在书页之间，遇见自己",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/shelf/shelf",
+      "style": {
+        "navigationBarTitleText": "我的书架 · 纸间",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/notes/notes",
+      "style": {
+        "navigationBarTitleText": "阅读手记 · 纸间",
+        "enablePullDownRefresh": false
+      }
+    }
+  ],
+  // #ifndef H5
+  // 小程序与 App 用原生底部 tabBar 承载三个顶级页面（H5 仍用页头导航）
+  "tabBar": {
+    "color": "#7a816d",
+    "selectedColor": "#294b3c",
+    "backgroundColor": "#faf9f5",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/discover/discover",
+        "text": "发现",
+        "iconPath": "static/tabbar/discover.png",
+        "selectedIconPath": "static/tabbar/discover-on.png"
+      },
+      {
+        "pagePath": "pages/shelf/shelf",
+        "text": "书架",
+        "iconPath": "static/tabbar/shelf.png",
+        "selectedIconPath": "static/tabbar/shelf-on.png"
+      },
+      {
+        "pagePath": "pages/notes/notes",
+        "text": "手记",
+        "iconPath": "static/tabbar/notes.png",
+        "selectedIconPath": "static/tabbar/notes-on.png"
+      }
+    ]
+  },
+  // #endif
+  "globalStyle": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "纸间",
+    "navigationBarBackgroundColor": "#faf9f5",
+    "backgroundColor": "#faf9f5",
+    "backgroundColorTop": "#faf9f5",
+    "backgroundColorBottom": "#faf9f5",
+    "app-plus": {
+      "background": "#faf9f5",
+      "titleNView": false,
+      "bounce": "none",
+      // 软键盘弹出时压缩 webview（默认 adjustPan 会把弹窗底部按钮挡在键盘后面）
+      "softinputMode": "adjustResize"
+    }
+  },
+  "condition": {
+    "current": 0,
+    "list": [
+      {
+        "name": "发现好书",
+        "path": "pages/discover/discover"
+      },
+      {
+        "name": "我的书架",
+        "path": "pages/shelf/shelf"
+      },
+      {
+        "name": "阅读手记",
+        "path": "pages/notes/notes"
+      },
+      {
+        "name": "新建手记（携带书目）",
+        "path": "pages/notes/notes",
+        "query": "compose=1&book=walden"
+      }
+    ]
+  }
+}
