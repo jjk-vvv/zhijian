@@ -1,0 +1,28 @@
+[project]
+name = "zhijian-api"
+version = "0.1.0"
+description = "纸间 · 阅读记录与共读社区 API（FastAPI 版）"
+readme = "README.md"
+authors = [
+    { name = "Oxygencookie", email = "197778886+jjk-vvv@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "asyncpg>=0.32.0",
+    "bcrypt>=5.0.0",
+    "fastapi>=0.165.0",
+    "passlib[bcrypt]>=1.7.4",
+    "pydantic>=2.14.3",
+    "pydantic-settings>=2.16.3",
+    "python-jose[cryptography]>=3.5.0",
+    "slowapi>=0.1.10",
+    "structlog>=26.1.0",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+zhijian-api = "zhijian_api:main"
+
+[build-system]
+requires = ["uv_build>=0.12.8,<0.13.0"]
+build-backend = "uv_build"

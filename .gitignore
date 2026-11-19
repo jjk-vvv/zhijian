@@ -3,11 +3,21 @@ dist/
 playwright-report/
 test-results/
 .env*
+!.env.example
 .netlify/
 .openai/*.tmp
 
 # 本地评审/渲染产物（截图、QA 日志），不入库
 report-work-*/
+# 文档分享包临时缓存
+.trae-html-share-packages/
+# 本地 PostgreSQL 数据目录
+.pgdata/
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.uv-cache/
 # HBuilderX 构建产物
 uniapp/unpackage/
 # 编辑器/系统文件

@@ -1,59 +1,88 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useLibrary } from '../composables/useLibrary.js'
 import ShelfStats from '../components/shelf/ShelfStats.vue'
 import ShelfFilters from '../components/shelf/ShelfFilters.vue'
 import ShelfBookCard from '../components/shelf/ShelfBookCard.vue'
+import ReadingTimer from '../components/shelf/ReadingTimer.vue'
 import AppIcon from '../components/ui/AppIcon.vue'
 import EmptyState from '../components/ui/EmptyState.vue'
 import ConfirmDialog from '../components/ui/ConfirmDialog.vue'
-import BookDetailModal from '../components/books/BookDetailModal.vue'
-const { shelfBooks, stats, removeBook, updateProgress, isSaved, addBook } = useLibrary()
-const filter = ref('all'),
-  removing = ref(null),
-  selectedBook = ref(null)
+
+const { shelfBooks, stats, removeBook, updateProgress, refreshShelf, refreshNotes, loading } = useLibrary()
+const filter = ref('all')
+const removing = ref(null)
+const timerBook = ref('')
+const timerOpen = ref(false)
+
 const visibleBooks = computed(() =>
   shelfBooks.value.filter((book) => filter.value === 'all' || book.status === filter.value),
 )
+
+function openTimer(book) {
+  timerBook.value = book?.slug || shelfBooks.value.find((item) => item.status === 'reading')?.slug || ''
+  timerOpen.value = true
+}
+
+function finish({ slug, value }) {
+  updateProgress(slug, value)
+}
+
+async function afterTimer() {
+  await Promise.all([refreshShelf(), refreshNotes()])
+}
+
 function confirmRemove() {
-  removeBook(removing.value.id)
+  removeBook(removing.value.slug)
   removing.value = null
 }
+
+onMounted(() => refreshShelf().catch(() => {}))
 </script>
 <template>
   <div class="container inner-page">
     <div class="page-heading">
       <div>
-        <span class="page-kicker">MY LITTLE LIBRARY</span>
         <h1>
           我的书架
           <span class="heading-dot">。</span>
         </h1>
         <p>想读的、在读的、读过的，都是生活的一部分。</p>
       </div>
-      <RouterLink to="/" class="button button-secondary">
-        <AppIcon name="plus" :size="18" />
-        发现更多好书
-      </RouterLink>
+      <div class="notes-actions">
+        <button class="button button-secondary" @click="openTimer()">
+          <AppIcon name="clock" :size="17" />
+          记录阅读
+        </button>
+        <RouterLink to="/" class="button">
+          <AppIcon name="plus" :size="17" />
+          发现好书
+        </RouterLink>
+      </div>
     </div>
+
     <ShelfStats :stats="stats" />
+
     <div class="shelf-section-header">
       <ShelfFilters v-model="filter" :stats="stats" />
-      <span class="local-data-note">收好每一段阅读时光</span>
+      <span class="local-data-note">收藏、进度与手记都会同步到你的账号</span>
     </div>
-    <div v-if="visibleBooks.length" class="shelf-grid">
+
+    <p v-if="loading && !shelfBooks.length" class="loading-note">正在整理你的书架…</p>
+    <div v-else-if="visibleBooks.length" class="shelf-grid">
       <ShelfBookCard
         v-for="book in visibleBooks"
-        :key="book.id"
+        :key="book.slug"
         :book="book"
-        @progress="updateProgress($event.id, $event.value)"
+        @progress="updateProgress($event.slug, $event.value)"
+        @finish="finish"
         @remove="removing = $event"
-        @detail="selectedBook = $event"
+        @timer="openTimer"
       />
     </div>
     <EmptyState
       v-else
-      title="给下一本好书，留一个位置"
+      :title="filter === 'all' ? '给下一本好书，留一个位置' : '这个状态下还没有书'"
       description="去发现页挑一本想读的书，或者切换阅读状态看看。"
     >
       <RouterLink to="/" class="button">
@@ -61,9 +90,7 @@ function confirmRemove() {
         <AppIcon name="arrow" :size="17" />
       </RouterLink>
     </EmptyState>
-    <p class="data-footnote">
-      首次访问时，我们为你放入了 3 本示例藏书。书架和手记仅保存在当前浏览器，你可以自由修改。
-    </p>
+
     <ConfirmDialog
       v-if="removing"
       title="将这本书移出书架？"
@@ -72,12 +99,13 @@ function confirmRemove() {
       @cancel="removing = null"
       @confirm="confirmRemove"
     />
-    <BookDetailModal
-      v-if="selectedBook"
-      :book="selectedBook"
-      :saved="isSaved(selectedBook.id)"
-      @close="selectedBook = null"
-      @save="addBook"
+
+    <ReadingTimer
+      v-if="timerOpen"
+      :books="shelfBooks"
+      :initial-book="timerBook"
+      @close="timerOpen = false"
+      @saved="afterTimer"
     />
   </div>
 </template>

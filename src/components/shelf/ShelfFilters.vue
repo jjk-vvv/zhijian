@@ -6,6 +6,7 @@ const tabs = [
   { key: 'reading', label: '正在读', count: 'reading' },
   { key: 'wishlist', label: '想读', count: 'wishlist' },
   { key: 'finished', label: '已读完', count: 'finished' },
+  { key: 'dnf', label: '已弃读', count: 'dnf' },
 ]
 </script>
 <template>

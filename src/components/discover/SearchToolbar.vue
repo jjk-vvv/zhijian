@@ -19,6 +19,8 @@ const emit = defineEmits(['update:modelValue', 'update:sort'])
       <span class="sr-only">书籍排序</span>
       <select :value="sort" @change="emit('update:sort', $event.target.value)">
         <option value="curated">编辑精选</option>
+        <option value="rating">评分最高</option>
+        <option value="popular">最多人评</option>
         <option value="title">书名排序</option>
         <option value="year">出版时间</option>
       </select>

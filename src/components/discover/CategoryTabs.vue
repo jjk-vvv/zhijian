@@ -1,18 +1,17 @@
 <script setup>
-import { categories } from '../../data/books.js'
-defineProps({ modelValue: String })
+defineProps({ modelValue: String, categories: { type: Array, default: () => [] } })
 const emit = defineEmits(['update:modelValue'])
 </script>
 <template>
   <div class="category-tabs" role="group" aria-label="书籍分类">
     <button
       v-for="category in categories"
-      :key="category"
-      :class="{ active: modelValue === category }"
-      :aria-pressed="modelValue === category"
-      @click="emit('update:modelValue', category)"
+      :key="category.name"
+      :class="{ active: modelValue === category.name }"
+      :aria-pressed="modelValue === category.name"
+      @click="emit('update:modelValue', category.name)"
     >
-      {{ category }}
+      {{ category.name }}
     </button>
   </div>
 </template>

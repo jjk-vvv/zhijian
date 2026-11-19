@@ -1,19 +1,13 @@
 <script setup>
-import AppIcon from '../ui/AppIcon.vue'
 const emit = defineEmits(['explore'])
 </script>
 <template>
   <section class="discover-hero">
     <div class="hero-copy">
-      <div class="hero-eyebrow">
-        <span></span>
-        一个留给阅读的地方
-      </div>
       <h1>
         在书页之间，
         <br />
-        遇见
-        <span class="hero-emphasis">更大的世界。</span>
+        遇见<span class="hero-emphasis">更大的世界。</span>
       </h1>
       <p>
         让脚步慢一点，让思绪走远一点。
@@ -35,16 +29,8 @@ const emit = defineEmits(['explore'])
         fetchpriority="high"
       />
       <div class="hero-caption">
-        <span>THE JOY OF SLOW READING</span>
+        <span>慢读 · 静观</span>
         <span>给自己，一页的时间</span>
-      </div>
-      <div class="round-stamp" aria-hidden="true">
-        <AppIcon name="leaf" :size="25" />
-        <span>
-          READ SLOW
-          <br />
-          LIVE FULLY
-        </span>
       </div>
     </div>
   </section>

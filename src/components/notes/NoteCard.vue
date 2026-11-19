@@ -1,36 +1,31 @@
 <script setup>
 import { computed } from 'vue'
-import { getBook } from '../../data/books.js'
+import { TYPE_LABELS, formatDate } from '../../utils/format.js'
 import AppIcon from '../ui/AppIcon.vue'
+
 const props = defineProps({ note: Object })
 const emit = defineEmits(['edit', 'delete'])
-const book = computed(() => getBook(props.note.bookId))
-const date = computed(() =>
-  new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(
-    new Date(props.note.date),
-  ),
-)
+const date = computed(() => formatDate(props.note.createdAt))
 </script>
 <template>
   <article class="note-card">
     <header>
-      <span class="note-type">{{ note.type }}</span>
-      <span v-if="note.example" class="example-label">示例手记</span>
-      <time :datetime="note.date">{{ date }}</time>
+      <span class="note-type">{{ TYPE_LABELS[note.type] || '感想' }}</span>
+      <span v-if="note.isPrivate" class="note-private">
+        <AppIcon name="lock" :size="13" />
+        仅自己
+      </span>
+      <time :datetime="note.createdAt">{{ date }}</time>
     </header>
     <h2>{{ note.title }}</h2>
     <p class="note-content">{{ note.content }}</p>
     <footer>
-      <span class="note-book">
+      <RouterLink :to="`/book/${note.book.slug}`" class="note-book">
         <AppIcon name="book" :size="16" />
-        {{ book?.title }}
-      </span>
+        {{ note.book.title }}
+      </RouterLink>
       <div>
-        <button
-          class="icon-button"
-          :aria-label="'编辑手记：' + note.title"
-          @click="emit('edit', note)"
-        >
+        <button class="icon-button" :aria-label="'编辑手记：' + note.title" @click="emit('edit', note)">
           <AppIcon name="pen" :size="17" />
         </button>
         <button
